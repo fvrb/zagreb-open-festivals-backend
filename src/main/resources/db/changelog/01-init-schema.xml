@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.26.xsd">
+
+    <changeSet id="01-create-users-table" author="zagreb-open-festivals">
+        <createTable tableName="users">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="email" type="VARCHAR(150)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="02-create-refresh-tokens-table" author="zagreb-open-festivals">
+        <createTable tableName="refresh_tokens">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_refresh_token_user" references="users(id)"/>
+            </column>
+            <column name="token_hash" type="VARCHAR(64)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="expiry_date" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revoked" type="BOOLEAN" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="03-create-festivals-table" author="zagreb-open-festivals">
+        <createTable tableName="festivals">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(150)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(2000)"/>
+            <column name="location" type="VARCHAR(150)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="image_url" type="VARCHAR(500)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="04-create-foods-table" author="zagreb-open-festivals">
+        <createTable tableName="foods">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="NUMERIC(6,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="festival_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_food_festival" references="festivals(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="05-create-drinks-table" author="zagreb-open-festivals">
+        <createTable tableName="drinks">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="NUMERIC(6,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="festival_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_drink_festival" references="festivals(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="06-create-favorites-table" author="zagreb-open-festivals">
+        <createTable tableName="favorites">
+            <column name="id" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_favorite_user" references="users(id)"/>
+            </column>
+            <column name="festival_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_favorite_festival" references="festivals(id)"/>
+            </column>
+        </createTable>
+        <addUniqueConstraint tableName="favorites"
+                              columnNames="user_id, festival_id"
+                              constraintName="uq_favorite_user_festival"/>
+    </changeSet>
+
+</databaseChangeLog>

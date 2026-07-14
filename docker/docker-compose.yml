@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: zof-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: zagreb_open_festivals
+      POSTGRES_USER: zof_user
+      POSTGRES_PASSWORD: zof_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - zof_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U zof_user -d zagreb_open_festivals"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  zof_postgres_data:

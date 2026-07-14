@@ -1,0 +1,1422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.26.xsd">
+
+    <!-- Test korisnici. Lozinke su već BCrypt-hashirane.
+         admin / admin123   (ROLE_ADMIN)
+         marko / user123    (ROLE_USER)
+    -->
+    <changeSet id="07-seed-users" author="zagreb-open-festivals">
+        <insert tableName="users">
+            <column name="username" value="admin"/>
+            <column name="email" value="admin@zagrebopenfestivals.hr"/>
+            <column name="password" value="$2b$10$VsRVTViwtnRuBzKaLamVxuilDBBYl7mROnMSU0uOex7IoszRIhMC2"/>
+            <column name="role" value="ROLE_ADMIN"/>
+        </insert>
+        <insert tableName="users">
+            <column name="username" value="marko"/>
+            <column name="email" value="marko@zagrebopenfestivals.hr"/>
+            <column name="password" value="$2b$10$kJrSECaP/m4Q.63ZvbreweaduXRJvlpjPYbTKJxJtz65DcpYB3xGm"/>
+            <column name="role" value="ROLE_USER"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="08-seed-festivals" author="zagreb-open-festivals">
+        <insert tableName="festivals">
+            <column name="name" value="Beer Fest"/>
+            <column name="description"
+                    value="Najveći festival craft piva u Zagrebu, uz glazbu uživo i ponudu street fooda."/>
+            <column name="location" value="Jarun"/>
+            <column name="date" valueDate="2026-06-20"/>
+            <column name="image_url" value="https://picsum.photos/seed/beerfest/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Food Festival"/>
+            <column name="description"
+                    value="Gastro festival s ponudom jela iz cijele regije i radionicama za posjetitelje."/>
+            <column name="location" value="Tvornica kulture"/>
+            <column name="date" valueDate="2026-07-15"/>
+            <column name="image_url" value="https://picsum.photos/seed/foodfestival/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Wine and Jazz Festival"/>
+            <column name="description"
+                    value="Festival vina uz pratnju vrhunskih jazz glazbenika u prekrasnom ambijentu."/>
+            <column name="location" value="Strossmayerov trg"/>
+            <column name="date" valueDate="2026-05-28"/>
+            <column name="image_url" value="https://picsum.photos/seed/winejazz/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Street Food Market"/>
+            <column name="description"
+                    value="Ekskluzivni street food market s chefskim jelima i craft pićima."/>
+            <column name="location" value="Britanski trg"/>
+            <column name="date" valueDate="2026-06-05"/>
+            <column name="image_url" value="https://picsum.photos/seed/streetfoodmarket/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Škartacet Fest"/>
+            <column name="description"
+                    value="Festival antikvarijata i vintage proizvoda u centru grada."/>
+            <column name="location" value="Cvjetni trg"/>
+            <column name="date" valueDate="2026-04-18"/>
+            <column name="image_url" value="https://picsum.photos/seed/skartacet/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Rector's Summer"/>
+            <column name="description"
+                    value="Festival na otvorenom s koncertima i kazališnim predstavama."/>
+            <column name="location" value="Rektorova palača"/>
+            <column name="date" valueDate="2026-07-01"/>
+            <column name="image_url" value="https://picsum.photos/seed/rectorsummer/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Zagrebački Velesajam Kulturi"/>
+            <column name="description"
+                    value="Festival kulture i umjetnosti na prostorima Zagrebačkog velesajma."/>
+            <column name="location" value="Velesajam"/>
+            <column name="date" valueDate="2026-08-12"/>
+            <column name="image_url" value="https://picsum.photos/seed/velesajamkultura/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Beer Weekend"/>
+            <column name="description"
+                    value="Vikend posvećen craft pivu s preko 50 vrsta domaćih i stranih pivovara."/>
+            <column name="location" value="Tuškanac"/>
+            <column name="date" valueDate="2026-06-27"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftbeerweekend/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Jazz and Blues Night"/>
+            <column name="description"
+                    value="Večer jazz i blues glazbe u vintage atmosferi."/>
+            <column name="location" value="Kulturni centar"/>
+            <column name="date" valueDate="2026-07-22"/>
+            <column name="image_url" value="https://picsum.photos/seed/jazzbluesnight/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Mediterranean Flavors"/>
+            <column name="description"
+                    value="Festival mediteranske kuhinje s chefom iz Italije, Grčke i Hrvatske."/>
+            <column name="location" value="Zrinjevac"/>
+            <column name="date" valueDate="2026-08-03"/>
+            <column name="image_url" value="https://picsum.photos/seed/mediterranean/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Film pod zvijezdama"/>
+            <column name="description"
+                    value="Open-air kino s projekcijama domaćih i stranih filmova."/>
+            <column name="location" value="Jarun jezero"/>
+            <column name="date" valueDate="2026-07-10"/>
+            <column name="image_url" value="https://picsum.photos/seed/filmzvijezdama/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="ART Zagreb"/>
+            <column name="description"
+                    value="Festival suvremene umjetnosti s izložbama i performansima."/>
+            <column name="location" value="Muzej suvremene umjetnosti"/>
+            <column name="date" valueDate="2026-09-05"/>
+            <column name="image_url" value="https://picsum.photos/seed/artzagreb/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Burger Battle"/>
+            <column name="description"
+                    value="Takmičenje najboljih burgera u gradu uz live cooking show."/>
+            <column name="location" value="Klovićevi dvori"/>
+            <column name="date" valueDate="2026-06-14"/>
+            <column name="image_url" value="https://picsum.photos/seed/burgerbattle/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Coffee Festival"/>
+            <column name="description"
+                    value="Festival specialty coffee kulture s baristama iz cijelog svijeta."/>
+            <column name="location" value="C感兴趣的"/>
+            <column name="date" valueDate="2026-05-15"/>
+            <column name="image_url" value="https://picsum.photos/seed/coffeefestival/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Retro Gaming Expo"/>
+            <column name="description"
+                    value="Festival retro gaminga s turnirima i izložbom starih konzola."/>
+            <column name="location" value="SC"/>
+            <column name="date" valueDate="2026-10-20"/>
+            <column name="image_url" value="https://picsum.photos/seed/retrogaming/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Balkan Food Fest"/>
+            <column name="description"
+                    value="Festival balkanske kuhinje s tradicionalnim jelima iz cijele regije."/>
+            <column name="location" value="Trg bana Josipa Jelačića"/>
+            <column name="date" valueDate="2026-08-20"/>
+            <column name="image_url" value="https://picsum.photos/seed/balkanfood/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Electronic Music Weekend"/>
+            <column name="description"
+                    value="Elektronska glazba na otvorenom s domaćim i stranim DJ-evima."/>
+            <column name="location" value="Lapide"/>
+            <column name="date" valueDate="2026-07-25"/>
+            <column name="image_url" value="https://picsum.photos/seed/electronicmusic/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Chocolate Festival"/>
+            <column name="description"
+                    value="Sve o čokoladi - radionice, kušanje i prodaja."/>
+            <column name="location" value="Neboder"/>
+            <column name="date" valueDate="2026-11-08"/>
+            <column name="image_url" value="https://picsum.photos/seed/chocolatefestival/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Spirits Fair"/>
+            <column name="description"
+                    value="Festival craft destilata i koktela s masterclassima."/>
+            <column name="location" value="Kaptol"/>
+            <column name="date" valueDate="2026-09-18"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftspirits/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Urban Arts Festival"/>
+            <column name="description"
+                    value="Festival urbanog stila, graffiti umjetnosti i street culture."/>
+            <column name="location" value="Savica"/>
+            <column name="date" valueDate="2026-06-08"/>
+            <column name="image_url" value="https://picsum.photos/seed/urbanarts/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Truffle Days"/>
+            <column name="description"
+                    value="Dani tartufa s delikatesama iz Istre."/>
+            <column name="location" value="Dolac"/>
+            <column name="date" valueDate="2026-10-05"/>
+            <column name="image_url" value="https://picsum.photos/seed/truffledays/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Summer Cinema Park"/>
+            <column name="description"
+                    value="Ljetno kino pod vedrim nebom s tematskim večerima."/>
+            <column name="location" value="Maksimir park"/>
+            <column name="date" valueDate="2026-07-18"/>
+            <column name="image_url" value="https://picsum.photos/seed/summercinema/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Comic Con Zagreb"/>
+            <column name="description"
+                    value="Festival stripova, igara i pop kulture."/>
+            <column name="location" value="Arena Zagreb"/>
+            <column name="date" valueDate="2026-05-22"/>
+            <column name="image_url" value="https://picsum.photos/seed/comicconzg/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Wine Harvest Festival"/>
+            <column name="description"
+                    value="Festival berbe grožđa s vinarskim kušaonicama."/>
+            <column name="location" value="Šestine"/>
+            <column name="date" valueDate="2026-09-25"/>
+            <column name="image_url" value="https://picsum.photos/seed/wineharvest/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Street Art Walk"/>
+            <column name="description"
+                    value="Turneja zagrebačkim muralima uz guide."/>
+            <column name="location" value="Trešnjevka"/>
+            <column name="date" valueDate="2026-06-12"/>
+            <column name="image_url" value="https://picsum.photos/seed/streetartwalk/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Seafood Festival"/>
+            <column name="description"
+                    value="Festival mora i plodova s jadranskom kuhinjom."/>
+            <column name="location" value="Trnsko"/>
+            <column name="date" valueDate="2026-08-08"/>
+            <column name="image_url" value="https://picsum.photos/seed/seafoodfestival/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Tech Startup Fair"/>
+            <column name="description"
+                    value="Sajam startup kompanija i tehnoloških inovacija."/>
+            <column name="location" value="Zagreb Tower"/>
+            <column name="date" valueDate="2026-11-15"/>
+            <column name="image_url" value="https://picsum.photos/seed/techstartup/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Flea Market Fest"/>
+            <column name="description"
+                    value="Veliki sajam rabljene robe i antikviteta."/>
+            <column name="location" value="Homoljek"/>
+            <column name="date" valueDate="2026-07-05"/>
+            <column name="image_url" value="https://picsum.photos/seed/fleamarketfest/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Classical Music Open Air"/>
+            <column name="description"
+                    value="Klasčna glazba pod otvorenim nebom."/>
+            <column name="location" value="Botanički vrt"/>
+            <column name="date" valueDate="2026-06-28"/>
+            <column name="image_url" value="https://picsum.photos/seed/classicalmusic/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Pizza Championship"/>
+            <column name="description"
+                    value="Natjecanje najboljih pizza majstora iz Hrvatske."/>
+            <column name="location" value="Remete"/>
+            <column name="date" valueDate="2026-07-28"/>
+            <column name="image_url" value="https://picsum.photos/seed/pizzachamp/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Book Fair Zagreb"/>
+            <column name="description"
+                    value="Sajam knjiga s piscima i potpisivanjima."/>
+            <column name="location" value="Glas Koncila"/>
+            <column name="date" valueDate="2026-10-10"/>
+            <column name="image_url" value="https://picsum.photos/seed/bookfair/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="BBQ and Grill Fest"/>
+            <column name="description"
+                    value="Festival roštilja s natjecanjem najboljih gril majstora."/>
+            <column name="location" value="Kajzerica"/>
+            <column name="date" valueDate="2026-08-15"/>
+            <column name="image_url" value="https://picsum.photos/seed/bbqgrillfest/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Indie Game Festival"/>
+            <column name="description"
+                    value="Festival neovisnih igara s prezentacijama i demoima."/>
+            <column name="location" value="Maid"/>
+            <column name="date" valueDate="2026-09-12"/>
+            <column name="image_url" value="https://picsum.photos/seed/indiegamefest/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Croatian Honey Fair"/>
+            <column name="description"
+                    value="Sajam meda i pčelinjih proizvoda."/>
+            <column name="location" value="Maksimir"/>
+            <column name="date" valueDate="2026-08-22"/>
+            <column name="image_url" value="https://picsum.photos/seed/honeyfair/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Electro Swing Party"/>
+            <column name="description"
+                    value="Elektro swing party s vintage atmosferom."/>
+            <column name="location" value="Boćarski dom"/>
+            <column name="date" valueDate="2026-06-21"/>
+            <column name="image_url" value="https://picsum.photos/seed/electroswing/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Vegan Food Expo"/>
+            <column name="description"
+                    value="Festival veganskog načina života i hrane."/>
+            <column name="location" value="Ribnjak"/>
+            <column name="date" valueDate="2026-07-08"/>
+            <column name="image_url" value="https://picsum.photos/seed/veganexpo/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Rock Festival Zagreb"/>
+            <column name="description"
+                    value="Veliki rock festival s domaćim i stranim bendovima."/>
+            <column name="location" value="Kranjčevićeva"/>
+            <column name="date" valueDate="2026-08-28"/>
+            <column name="image_url" value="https://picsum.photos/seed/rockfestzg/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Photography Exhibition"/>
+            <column name="description"
+                    value="Izložba fotografija renomiranih autora."/>
+            <column name="location" value="Lauba"/>
+            <column name="date" valueDate="2026-05-30"/>
+            <column name="image_url" value="https://picsum.photos/seed/photoexhibition/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Chocolate Fair"/>
+            <column name="description"
+                    value="Festival ručno rađene čokolade."/>
+            <column name="location" value="Nova Ves"/>
+            <column name="date" valueDate="2026-11-20"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftchocolate/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Summer Sports Day"/>
+            <column name="description"
+                    value="Dan sporta s atrakcijama za sve uzraste."/>
+            <column name="location" value="Jarun sportski centar"/>
+            <column name="date" valueDate="2026-07-12"/>
+            <column name="image_url" value="https://picsum.photos/seed/sportsday/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Opera Under Stars"/>
+            <column name="description"
+                    value="Operne arije na otvorenom."/>
+            <column name="location" value="Mirogoj"/>
+            <column name="date" valueDate="2026-06-15"/>
+            <column name="image_url" value="https://picsum.photos/seed/operaunderstars/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Market Weekend"/>
+            <column name="description"
+                    value="Vikend sajam handmade proizvoda."/>
+            <column name="location" value="Jarun"/>
+            <column name="date" valueDate="2026-06-07"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftmarket/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Cheese Festival"/>
+            <column name="description"
+                    value="Festival sireva iz cijele Hrvatske."/>
+            <column name="location" value="Krapina"/>
+            <column name="date" valueDate="2026-09-28"/>
+            <column name="image_url" value="https://picsum.photos/seed/cheesefest/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Street Dance Battle"/>
+            <column name="description"
+                    value="Natjecanje street dance grupa."/>
+            <column name="location" value="Trg svetog Marka"/>
+            <column name="date" valueDate="2026-08-01"/>
+            <column name="image_url" value="https://picsum.photos/seed/streetdance/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Wine Tasting Evening"/>
+            <column name="description"
+                    value="Večer kušanja vina s enologom."/>
+            <column name="location" value="Vinogradska"/>
+            <column name="date" valueDate="2026-05-25"/>
+            <column name="image_url" value="https://picsum.photos/seed/winetseting/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Ice Cream Festival"/>
+            <column name="description"
+                    value="Festival slastica s najboljim sladoledom u gradu."/>
+            <column name="location" value="Bogdana Ogrizovića"/>
+            <column name="date" valueDate="2026-07-30"/>
+            <column name="image_url" value="https://picsum.photos/seed/icecreamfest/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Comedy Night Festival"/>
+            <column name="description"
+                    value="Festival stand-up komedije s domaćim i stranim komičarima."/>
+            <column name="location" value="Kino Europa"/>
+            <column name="date" valueDate="2026-09-08"/>
+            <column name="image_url" value="https://picsum.photos/seed/comedyfestival/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Tea Ceremony Festival"/>
+            <column name="description"
+                    value="Festival čajeva s radionicama i predavanjima."/>
+            <column name="location" value="Lotrščak"/>
+            <column name="date" valueDate="2026-10-25"/>
+            <column name="image_url" value="https://picsum.photos/seed/teaceremony/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Digital Art Fair"/>
+            <column name="description"
+                    value="Festival digitalne umjetnosti i NFT izložba."/>
+            <column name="location" value="Zagrebački plesni centar"/>
+            <column name="date" valueDate="2026-11-05"/>
+            <column name="image_url" value="https://picsum.photos/seed/digitalartfair/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Pizza Days"/>
+            <column name="description"
+                    value="Dani pice s gostujućim pizzaiolima iz Italije."/>
+            <column name="location" value="Ilica"/>
+            <column name="date" valueDate="2026-07-06"/>
+            <column name="image_url" value="https://picsum.photos/seed/pizzadays/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Folk Music Festival"/>
+            <column name="description"
+                    value="Festival tradicionalne folk glazbe."/>
+            <column name="location" value="Mirogoj"/>
+            <column name="date" valueDate="2026-08-10"/>
+            <column name="image_url" value="https://picsum.photos/seed/folkmusic/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Handmade Design Market"/>
+            <column name="description"
+                    value="Sajam ručno rađenog dizajna i nakita."/>
+            <column name="location" value="Cankarov dom"/>
+            <column name="date" valueDate="2026-06-22"/>
+            <column name="image_url" value="https://picsum.photos/seed/handmade/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Sushi Masters"/>
+            <column name="description"
+                    value="Festival sušija s natjecanjem master chefova."/>
+            <column name="location" value="Westgate"/>
+            <column name="date" valueDate="2026-09-02"/>
+            <column name="image_url" value="https://picsum.photos/seed/sushimasters/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Autumn Wine Weekend"/>
+            <column name="description"
+                    value="Vikend vina i jesenskih specijaliteta."/>
+            <column name="location" value="Jankomir"/>
+            <column name="date" valueDate="2026-10-17"/>
+            <column name="image_url" value="https://picsum.photos/seed/autumnwine/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Puppet Festival"/>
+            <column name="description"
+                    value="Festival kazališta lutaka za djecu i odrasle."/>
+            <column name="location" value="Vidra"/>
+            <column name="date" valueDate="2026-11-12"/>
+            <column name="image_url" value="https://picsum.photos/seed/puppetfest/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Burger Week Zagreb"/>
+            <column name="description"
+                    value="Tjedan burgera s posebnim ponudama restorana."/>
+            <column name="location" value="Cijeli grad"/>
+            <column name="date" valueDate="2026-06-01"/>
+            <column name="image_url" value="https://picsum.photos/seed/burgerweek/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Electronic Expo"/>
+            <column name="description"
+                    value="Sajam elektronike i tehnologije."/>
+            <column name="location" value="Velesajam"/>
+            <column name="date" valueDate="2026-05-10"/>
+            <column name="image_url" value="https://picsum.photos/seed/electronicexpo/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Yoga and Wellness Fest"/>
+            <column name="description"
+                    value="Festival joge i wellnessa na otvorenom."/>
+            <column name="location" value="Jarun park"/>
+            <column name="date" valueDate="2026-07-20"/>
+            <column name="image_url" value="https://picsum.photos/seed/yogawellness/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Soda Tasting"/>
+            <column name="description"
+                    value="Kušanje craft bezalkoholnih pića."/>
+            <column name="location" value="Nova Ves"/>
+            <column name="date" valueDate="2026-08-25"/>
+            <column name="image_url" value="https://picsum.photos/seed/craft soda/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Street Photography Walk"/>
+            <column name="description"
+                    value="Fotografski obilazak grada s profesionalnim photographerom."/>
+            <column name="location" value="Donji grad"/>
+            <column name="date" valueDate="2026-06-18"/>
+            <column name="image_url" value="https://picsum.photos/seed/streetphoto/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Beer Festival"/>
+            <column name="description"
+                    value="Festival craft piva iz regije."/>
+            <column name="location" value="Strossmayerov trg"/>
+            <column name="date" valueDate="2026-07-14"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftbeerfest/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Jazz Festival Zagreb"/>
+            <column name="description"
+                    value="Međunarodni jazz festival s poznatim glazbenicima."/>
+            <column name="location" value="Koncertna dvorana Vatroslav Lisinski"/>
+            <column name="date" valueDate="2026-10-02"/>
+            <column name="image_url" value="https://picsum.photos/seed/jazzfestivalzg/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Local Food Market"/>
+            <column name="description"
+                    value="Pijac lokalnih proizvođača hrane."/>
+            <column name="location" value="Dolac"/>
+            <column name="date" valueDate="2026-05-20"/>
+            <column name="image_url" value="https://picsum.photos/seed/localfoodmarket/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Indie Film Festival"/>
+            <column name="description"
+                    value="Festival nezavisnog filma."/>
+            <column name="location" value="Kino Tuškanac"/>
+            <column name="date" valueDate="2026-09-15"/>
+            <column name="image_url" value="https://picsum.photos/seed/indiefilm/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Wine and Dine Evening"/>
+            <column name="description"
+                    value="Večera s pairingom vina i hrane."/>
+            <column name="location" value="Kaptol"/>
+            <column name="date" valueDate="2026-08-18"/>
+            <column name="image_url" value="https://picsum.photos/seed/winedine/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Gin Festival"/>
+            <column name="description"
+                    value="Festival craft ginova s kušaonicama."/>
+            <column name="location" value="Neboder"/>
+            <column name="date" valueDate="2026-06-25"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftgin/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Street Food Saturday"/>
+            <column name="description"
+                    value="Subota s najboljim street food ponudama."/>
+            <column name="location" value="Britanski trg"/>
+            <column name="date" valueDate="2026-07-11"/>
+            <column name="image_url" value="https://picsum.photos/seed/streetfoodsat/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Photography Workshop Fest"/>
+            <column name="description"
+                    value="Radionice fotografije za početnike i napredne."/>
+            <column name="location" value="Lauba"/>
+            <column name="date" valueDate="2026-06-30"/>
+            <column name="image_url" value="https://picsum.photos/seed/photoworkshop/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Cider Fest"/>
+            <column name="description"
+                    value="Festival craft cidera i jabukovače."/>
+            <column name="location" value="Maksimir park"/>
+            <column name="date" valueDate="2026-09-22"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftcider/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Summer Rooftop Party"/>
+            <column name="description"
+                    value="Zabava na krovu s pogledom na grad."/>
+            <column name="location" value="Neboder"/>
+            <column name="date" valueDate="2026-07-26"/>
+            <column name="image_url" value="https://picsum.photos/seed/rooftopparty/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Vegan Market"/>
+            <column name="description"
+                    value="Veganski sajam proizvoda i hrane."/>
+            <column name="location" value="Ribnjak"/>
+            <column name="date" valueDate="2026-08-05"/>
+            <column name="image_url" value="https://picsum.photos/seed/veganmarket/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Street Art Festival"/>
+            <column name="description"
+                    value="Festival ulične umjetnosti live slikanje."/>
+            <column name="location" value="Savica"/>
+            <column name="date" valueDate="2026-07-03"/>
+            <column name="image_url" value="https://picsum.photos/seed/streetartfest/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Whiskey Fair"/>
+            <column name="description"
+                    value="Festival craft viskija s masterclassima."/>
+            <column name="location" value="Kaptol"/>
+            <column name="date" valueDate="2026-10-30"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftwhiskey/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Food Truck Rally"/>
+            <column name="description"
+                    value="Okupljanje food truck vozila s raznovrsnom hranom."/>
+            <column name="location" value="Jarun"/>
+            <column name="date" valueDate="2026-08-30"/>
+            <column name="image_url" value="https://picsum.photos/seed/foodtruckrally/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Dance Festival Zagreb"/>
+            <column name="description"
+                    value="Festival suvremenog plesa i koreografije."/>
+            <column name="location" value="Zagrebački plesni centar"/>
+            <column name="date" valueDate="2026-11-02"/>
+            <column name="image_url" value="https://picsum.photos/seed/dancefestzg/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Croatian Wine Weekend"/>
+            <column name="description"
+                    value="Vikend domaćih vina iz svih regija."/>
+            <column name="location" value="Trg bana Josipa Jelačića"/>
+            <column name="date" valueDate="2026-09-10"/>
+            <column name="image_url" value="https://picsum.photos/seed/croatianwine/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Coffee Week"/>
+            <column name="description"
+                    value="Tjedan specialty coffee s popustima."/>
+            <column name="location" value="Cijeli grad"/>
+            <column name="date" valueDate="2026-05-18"/>
+            <column name="image_url" value="https://picsum.photos/seed/coffeweek/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Electronic Car Show"/>
+            <column name="description"
+                    value="Izložba električnih automobila i tehnologije."/>
+            <column name="location" value="Velesajam"/>
+            <column name="date" valueDate="2026-09-05"/>
+            <column name="image_url" value="https://picsum.photos/seed/elecarcarshow/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Jazz Brunch Festival"/>
+            <column name="description"
+                    value="Brunch uz jazz glazbu nedjeljom."/>
+            <column name="location" value="Zrinjevac"/>
+            <column name="date" valueDate="2026-07-19"/>
+            <column name="image_url" value="https://picsum.photos/seed/jazzbrunch/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Beer and BBQ"/>
+            <column name="description"
+                    value="Festival craft piva i roštilja."/>
+            <column name="location" value="Kajzerica"/>
+            <column name="date" valueDate="2026-07-24"/>
+            <column name="image_url" value="https://picsum.photos/seed/beerbbq/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Artisan Chocolate Fest"/>
+            <column name="description"
+                    value="Festival ručno rađene čokolade."/>
+            <column name="location" value="Nova Ves"/>
+            <column name="date" valueDate="2026-11-25"/>
+            <column name="image_url" value="https://picsum.photos/seed/artisanchoco/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Outdoor Cinema Zagreb"/>
+            <column name="description"
+                    value="Kino na otvorenom svake večeri u ljeto."/>
+            <column name="location" value="Jarun jezero"/>
+            <column name="date" valueDate="2026-07-07"/>
+            <column name="image_url" value="https://picsum.photos/seed/outdoorcinema/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Tea Festival"/>
+            <column name="description"
+                    value="Festival čajeva iz cijelog svijeta."/>
+            <column name="location" value="Lotrščak"/>
+            <column name="date" valueDate="2026-10-15"/>
+            <column name="image_url" value="https://picsum.photos/seed/crafttea/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Street Food Festival"/>
+            <column name="description"
+                    value="Festival street food kulture."/>
+            <column name="location" value="Britanski trg"/>
+            <column name="date" valueDate="2026-06-10"/>
+            <column name="image_url" value="https://picsum.photos/seed/streetfoodfest/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Beer Tasting"/>
+            <column name="description"
+                    value="Kušanje craft piva s pivarima."/>
+            <column name="location" value="Tuškanac"/>
+            <column name="date" valueDate="2026-06-24"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftbeertasting/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Vegan Festival Zagreb"/>
+            <column name="description"
+                    value="Festival veganskog života i hrane."/>
+            <column name="location" value="Ribnjak"/>
+            <column name="date" valueDate="2026-08-12"/>
+            <column name="image_url" value="https://picsum.photos/seed/veganfestzg/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Market Zagreb"/>
+            <column name="description"
+                    value="Sajam craft proizvoda."/>
+            <column name="location" value="Jarun"/>
+            <column name="date" valueDate="2026-06-06"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftmarketzg/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Jazz Evening Zagreb"/>
+            <column name="description"
+                    value="Večer jazza u prekrasnom ambijentu."/>
+            <column name="location" value="Kulturni centar"/>
+            <column name="date" valueDate="2026-07-21"/>
+            <column name="image_url" value="https://picsum.photos/seed/jazzeve/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Spirits Festival"/>
+            <column name="description"
+                    value="Festival craft destilata."/>
+            <column name="location" value="Kaptol"/>
+            <column name="date" valueDate="2026-09-20"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftspiritsfest/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Food Festival Zagreb"/>
+            <column name="description"
+                    value="Festival hrane i pića."/>
+            <column name="location" value="Tvornica kulture"/>
+            <column name="date" valueDate="2026-07-16"/>
+            <column name="image_url" value="https://picsum.photos/seed/foodfestzg/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Wine Festival"/>
+            <column name="description"
+                    value="Festival craft vina iz malih vinarija."/>
+            <column name="location" value="Šestine"/>
+            <column name="date" valueDate="2026-09-26"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftwinefest/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Beer and Food Fest"/>
+            <column name="description"
+                    value="Festival piva i hrane."/>
+            <column name="location" value="Jarun"/>
+            <column name="date" valueDate="2026-06-21"/>
+            <column name="image_url" value="https://picsum.photos/seed/beerfoodfest/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Coffee Festival"/>
+            <column name="description"
+                    value="Festival craft kave."/>
+            <column name="location" value="Cijeli grad"/>
+            <column name="date" valueDate="2026-05-16"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftcoffeefest/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Artisan Cheese Fest"/>
+            <column name="description"
+                    value="Festival artisan sireva."/>
+            <column name="location" value="Krapina"/>
+            <column name="date" valueDate="2026-09-30"/>
+            <column name="image_url" value="https://picsum.photos/seed/artisancheese/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Street Food BBQ Fest"/>
+            <column name="description"
+                    value="Festival street food i roštilja."/>
+            <column name="location" value="Kajzerica"/>
+            <column name="date" valueDate="2026-08-17"/>
+            <column name="image_url" value="https://picsum.photos/seed/streetfoodbbq/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Beer Festival Zagreb"/>
+            <column name="description"
+                    value="Najveći festival craft piva u Zagrebu."/>
+            <column name="location" value="Strossmayerov trg"/>
+            <column name="date" valueDate="2026-07-15"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftbeerfestzg/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Jazz and Wine Festival"/>
+            <column name="description"
+                    value="Festival jazza i vina."/>
+            <column name="location" value="Vinogradska"/>
+            <column name="date" valueDate="2026-05-26"/>
+            <column name="image_url" value="https://picsum.photos/seed/jazzwinefest/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Chocolate Festival"/>
+            <column name="description"
+                    value="Festival craft čokolade."/>
+            <column name="location" value="Nova Ves"/>
+            <column name="date" valueDate="2026-11-22"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftchocofest/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Food and Wine Weekend"/>
+            <column name="description"
+                    value="Vikend hrane i vina."/>
+            <column name="location" value="Trg bana Josipa Jelačića"/>
+            <column name="date" valueDate="2026-08-23"/>
+            <column name="image_url" value="https://picsum.photos/seed/foodwinewend/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Soda Festival"/>
+            <column name="description"
+                    value="Festival craft bezalkoholnih pića."/>
+            <column name="location" value="Ribnjak"/>
+            <column name="date" valueDate="2026-08-28"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftsodafest/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Street Art Weekend"/>
+            <column name="description"
+                    value="Vikend ulične umjetnosti."/>
+            <column name="location" value="Trešnjevka"/>
+            <column name="date" valueDate="2026-06-13"/>
+            <column name="image_url" value="https://picsum.photos/seed/streetartwend/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Gin Tasting"/>
+            <column name="description"
+                    value="Kušanje craft ginova."/>
+            <column name="location" value="Neboder"/>
+            <column name="date" valueDate="2026-06-26"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftgintasting/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Vegan Food Weekend"/>
+            <column name="description"
+                    value="Vikend veganske hrane."/>
+            <column name="location" value="Ribnjak"/>
+            <column name="date" valueDate="2026-07-09"/>
+            <column name="image_url" value="https://picsum.photos/seed/veganfoodwend/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Beer and Music"/>
+            <column name="description"
+                    value="Festival craft piva uz live glazbu."/>
+            <column name="location" value="Jarun"/>
+            <column name="date" valueDate="2026-07-23"/>
+            <column name="image_url" value="https://picsum.photos/seed/beermusic/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Coffee and Jazz Morning"/>
+            <column name="description"
+                    value="Jutro s kavom i jazzom."/>
+            <column name="location" value="Zrinjevac"/>
+            <column name="date" valueDate="2026-07-17"/>
+            <column name="image_url" value="https://picsum.photos/seed/coffeejazz/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Whiskey Tasting"/>
+            <column name="description"
+                    value="Kušanje craft viskija."/>
+            <column name="location" value="Kaptol"/>
+            <column name="date" valueDate="2026-11-01"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftwhiskeytasting/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Artisan Bread Fest"/>
+            <column name="description"
+                    value="Festival ručno rađenog kruha."/>
+            <column name="location" value="Dolac"/>
+            <column name="date" valueDate="2026-10-08"/>
+            <column name="image_url" value="https://picsum.photos/seed/artisanbread/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Cider Weekend"/>
+            <column name="description"
+                    value="Vikend craft cidera."/>
+            <column name="location" value="Maksimir park"/>
+            <column name="date" valueDate="2026-09-24"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftciderwend/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Street Food and Beer"/>
+            <column name="description"
+                    value="Festival street food i piva."/>
+            <column name="location" value="Britanski trg"/>
+            <column name="date" valueDate="2026-06-09"/>
+            <column name="image_url" value="https://picsum.photos/seed/streetfoodbeer/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Tea Tasting"/>
+            <column name="description"
+                    value="Kušanje craft čajeva."/>
+            <column name="location" value="Lotrščak"/>
+            <column name="date" valueDate="2026-10-18"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftteatasting/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Food Photography Workshop"/>
+            <column name="description"
+                    value="Radionica fotografiranja hrane."/>
+            <column name="location" value="Lauba"/>
+            <column name="date" valueDate="2026-08-06"/>
+            <column name="image_url" value="https://picsum.photos/seed/foodphotoworkshop/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Soda Fair"/>
+            <column name="description"
+                    value="Sajam craft bezalkoholnih pića."/>
+            <column name="location" value="Ribnjak"/>
+            <column name="date" valueDate="2026-08-29"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftsodafair/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Artisan Honey Festival"/>
+            <column name="description"
+                    value="Festival artisan meda."/>
+            <column name="location" value="Maksimir"/>
+            <column name="date" valueDate="2026-08-24"/>
+            <column name="image_url" value="https://picsum.photos/seed/artisanhoney/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Beer Weekend Zagreb"/>
+            <column name="description"
+                    value="Vikend craft piva u Zagrebu."/>
+            <column name="location" value="Jarun"/>
+            <column name="date" valueDate="2026-06-28"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftbeerwendzg/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Wine and Jazz Evening"/>
+            <column name="description"
+                    value="Večer vina i jazza."/>
+            <column name="location" value="Vinogradska"/>
+            <column name="date" valueDate="2026-05-27"/>
+            <column name="image_url" value="https://picsum.photos/seed/winejazzeve/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Gin Weekend"/>
+            <column name="description"
+                    value="Vikend craft ginova."/>
+            <column name="location" value="Neboder"/>
+            <column name="date" valueDate="2026-06-27"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftginwend/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Street Food Market Weekend"/>
+            <column name="description"
+                    value="Vikend street food marketa."/>
+            <column name="location" value="Britanski trg"/>
+            <column name="date" valueDate="2026-06-07"/>
+            <column name="image_url" value="https://picsum.photos/seed/streetfoodmarketwend/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Artisan Chocolate Tasting"/>
+            <column name="description"
+                    value="Kušanje artisan čokolade."/>
+            <column name="location" value="Nova Ves"/>
+            <column name="date" valueDate="2026-11-23"/>
+            <column name="image_url" value="https://picsum.photos/seed/artisanchocotasting/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Wine Tasting"/>
+            <column name="description"
+                    value="Kušanje craft vina."/>
+            <column name="location" value="Šestine"/>
+            <column name="date" valueDate="2026-09-27"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftwinetasting/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Spirits Tasting"/>
+            <column name="description"
+                    value="Kušanje craft destilata."/>
+            <column name="location" value="Kaptol"/>
+            <column name="date" valueDate="2026-09-21"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftspiritstasting/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Vegan Food Festival"/>
+            <column name="description"
+                    value="Festival veganske hrane."/>
+            <column name="location" value="Ribnjak"/>
+            <column name="date" valueDate="2026-08-13"/>
+            <column name="image_url" value="https://picsum.photos/seed/veganfoodfest/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Beer Fair"/>
+            <column name="description"
+                    value="Sajam craft piva."/>
+            <column name="location" value="Jarun"/>
+            <column name="date" valueDate="2026-06-22"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftbeerfair/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Jazz Festival Summer"/>
+            <column name="description"
+                    value="Ljetni jazz festival."/>
+            <column name="location" value="Koncertna dvorana Vatroslav Lisinski"/>
+            <column name="date" valueDate="2026-10-03"/>
+            <column name="image_url" value="https://picsum.photos/seed/jazzfestsummer/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Food and Craft Beer"/>
+            <column name="description"
+                    value="Festival hrane i craft piva."/>
+            <column name="location" value="Strossmayerov trg"/>
+            <column name="date" valueDate="2026-07-13"/>
+            <column name="image_url" value="https://picsum.photos/seed/foodcraftbeer/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Coffee Tasting"/>
+            <column name="description"
+                    value="Kušanje craft kave."/>
+            <column name="location" value="Cijeli grad"/>
+            <column name="date" valueDate="2026-05-17"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftcoffeetasting/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Artisan Cheese Weekend"/>
+            <column name="description"
+                    value="Vikend artisan sireva."/>
+            <column name="location" value="Krapina"/>
+            <column name="date" valueDate="2026-10-01"/>
+            <column name="image_url" value="https://picsum.photos/seed/artisancheesewend/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Honey Festival"/>
+            <column name="description"
+                    value="Festival craft meda."/>
+            <column name="location" value="Maksimir"/>
+            <column name="date" valueDate="2026-08-21"/>
+            <column name="image_url" value="https://picsum.photos/seed/crafthoneyfest/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Street Art and Music"/>
+            <column name="description"
+                    value="Festival ulične umjetnosti i glazbe."/>
+            <column name="location" value="Savica"/>
+            <column name="date" valueDate="2026-07-04"/>
+            <column name="image_url" value="https://picsum.photos/seed/streetartmusic/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Whiskey Festival"/>
+            <column name="description"
+                    value="Festival craft viskija."/>
+            <column name="location" value="Kaptol"/>
+            <column name="date" valueDate="2026-10-31"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftwhiskeyfest/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Wine Weekend Zagreb"/>
+            <column name="description"
+                    value="Vikend vina u Zagrebu."/>
+            <column name="location" value="Trg bana Josipa Jelačića"/>
+            <column name="date" valueDate="2026-09-11"/>
+            <column name="image_url" value="https://picsum.photos/seed/winewendzg/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Food Festival Summer"/>
+            <column name="description"
+                    value="Ljetni festival hrane."/>
+            <column name="location" value="Tvornica kulture"/>
+            <column name="date" valueDate="2026-07-17"/>
+            <column name="image_url" value="https://picsum.photos/seed/foodfestsummer/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Tea Week"/>
+            <column name="description"
+                    value="Tjedan craft čajeva."/>
+            <column name="location" value="Lotrščak"/>
+            <column name="date" valueDate="2026-10-16"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftteaweek/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Street Food Festival Zagreb"/>
+            <column name="description"
+                    value="Najveći street food festival u Zagrebu."/>
+            <column name="location" value="Britanski trg"/>
+            <column name="date" valueDate="2026-06-11"/>
+            <column name="image_url" value="https://picsum.photos/seed/streetfoodfestzg/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Beer Festival Summer"/>
+            <column name="description"
+                    value="Ljetni festival craft piva."/>
+            <column name="location" value="Strossmayerov trg"/>
+            <column name="date" valueDate="2026-07-16"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftbeerfestsummer/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Jazz and Wine Evening"/>
+            <column name="description"
+                    value="Večer jazza i vina."/>
+            <column name="location" value="Vinogradska"/>
+            <column name="date" valueDate="2026-05-28"/>
+            <column name="image_url" value="https://picsum.photos/seed/jazzwineevening/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Chocolate Weekend"/>
+            <column name="description"
+                    value="Vikend craft čokolade."/>
+            <column name="location" value="Nova Ves"/>
+            <column name="date" valueDate="2026-11-24"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftchocowend/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Food and Wine Festival Zagreb"/>
+            <column name="description"
+                    value="Festival hrane i vina u Zagrebu."/>
+            <column name="location" value="Trg bana Josipa Jelačića"/>
+            <column name="date" valueDate="2026-08-24"/>
+            <column name="image_url" value="https://picsum.photos/seed/foodwinefestzg/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Soda Weekend"/>
+            <column name="description"
+                    value="Vikend craft bezalkoholnih pića."/>
+            <column name="location" value="Ribnjak"/>
+            <column name="date" valueDate="2026-08-30"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftsodawend/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Street Art Festival Zagreb"/>
+            <column name="description"
+                    value="Festival ulične umjetnosti u Zagrebu."/>
+            <column name="location" value="Trešnjevka"/>
+            <column name="date" valueDate="2026-06-14"/>
+            <column name="image_url" value="https://picsum.photos/seed/streetartfestzg/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Gin Festival Zagreb"/>
+            <column name="description"
+                    value="Festival craft ginova u Zagrebu."/>
+            <column name="location" value="Neboder"/>
+            <column name="date" valueDate="2026-06-28"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftginfestzg/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Vegan Food Weekend Zagreb"/>
+            <column name="description"
+                    value="Vikend veganske hrane u Zagrebu."/>
+            <column name="location" value="Ribnjak"/>
+            <column name="date" valueDate="2026-07-10"/>
+            <column name="image_url" value="https://picsum.photos/seed/veganfoodwendzg/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Beer and Music Festival"/>
+            <column name="description"
+                    value="Festival craft piva i glazbe."/>
+            <column name="location" value="Jarun"/>
+            <column name="date" valueDate="2026-07-24"/>
+            <column name="image_url" value="https://picsum.photos/seed/beermusicfest/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Coffee and Jazz Weekend"/>
+            <column name="description"
+                    value="Vikend kave i jazza."/>
+            <column name="location" value="Zrinjevac"/>
+            <column name="date" valueDate="2026-07-18"/>
+            <column name="image_url" value="https://picsum.photos/seed/coffeejazzwend/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Whiskey Weekend"/>
+            <column name="description"
+                    value="Vikend craft viskija."/>
+            <column name="location" value="Kaptol"/>
+            <column name="date" valueDate="2026-11-02"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftwhiskeywend/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Artisan Bread Weekend"/>
+            <column name="description"
+                    value="Vikend artisan kruha."/>
+            <column name="location" value="Dolac"/>
+            <column name="date" valueDate="2026-10-09"/>
+            <column name="image_url" value="https://picsum.photos/seed/artisanbreadwend/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Cider Festival Zagreb"/>
+            <column name="description"
+                    value="Festival craft cidera u Zagrebu."/>
+            <column name="location" value="Maksimir park"/>
+            <column name="date" valueDate="2026-09-25"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftciderfestzg/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Street Food and Beer Festival"/>
+            <column name="description"
+                    value="Festival street food i piva."/>
+            <column name="location" value="Britanski trg"/>
+            <column name="date" valueDate="2026-06-12"/>
+            <column name="image_url" value="https://picsum.photos/seed/streetfoodbeerfest/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Tea Weekend"/>
+            <column name="description"
+                    value="Vikend craft čajeva."/>
+            <column name="location" value="Lotrščak"/>
+            <column name="date" valueDate="2026-10-19"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftteaweekend/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Food Photography Weekend"/>
+            <column name="description"
+                    value="Vikend fotografiranja hrane."/>
+            <column name="location" value="Lauba"/>
+            <column name="date" valueDate="2026-08-07"/>
+            <column name="image_url" value="https://picsum.photos/seed/foodphotowend/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Soda Festival Zagreb"/>
+            <column name="description"
+                    value="Festival craft bezalkoholnih pića u Zagrebu."/>
+            <column name="location" value="Ribnjak"/>
+            <column name="date" valueDate="2026-08-31"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftsodafestzg/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Artisan Honey Weekend"/>
+            <column name="description"
+                    value="Vikend artisan meda."/>
+            <column name="location" value="Maksimir"/>
+            <column name="date" valueDate="2026-08-25"/>
+            <column name="image_url" value="https://picsum.photos/seed/artisanhoneywend/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Beer Weekend Summer"/>
+            <column name="description"
+                    value="Ljetni vikend craft piva."/>
+            <column name="location" value="Jarun"/>
+            <column name="date" valueDate="2026-06-29"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftbeerwendsummer/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Wine and Jazz Weekend"/>
+            <column name="description"
+                    value="Vikend vina i jazza."/>
+            <column name="location" value="Vinogradska"/>
+            <column name="date" valueDate="2026-05-29"/>
+            <column name="image_url" value="https://picsum.photos/seed/winejazzwend/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Gin Weekend Zagreb"/>
+            <column name="description"
+                    value="Vikend craft ginova u Zagrebu."/>
+            <column name="location" value="Neboder"/>
+            <column name="date" valueDate="2026-06-29"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftginwendzg/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Street Food Market Weekend Zagreb"/>
+            <column name="description"
+                    value="Vikend street food marketa u Zagrebu."/>
+            <column name="location" value="Britanski trg"/>
+            <column name="date" valueDate="2026-06-08"/>
+            <column name="image_url" value="https://picsum.photos/seed/streetfoodmarketwendzg/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Artisan Chocolate Tasting Weekend"/>
+            <column name="description"
+                    value="Vikend kušanja artisan čokolade."/>
+            <column name="location" value="Nova Ves"/>
+            <column name="date" valueDate="2026-11-25"/>
+            <column name="image_url" value="https://picsum.photos/seed/artisanchocotastingwend/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Wine Weekend"/>
+            <column name="description"
+                    value="Vikend craft vina."/>
+            <column name="location" value="Šestine"/>
+            <column name="date" valueDate="2026-09-29"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftwinewend/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Spirits Weekend"/>
+            <column name="description"
+                    value="Vikend craft destilata."/>
+            <column name="location" value="Kaptol"/>
+            <column name="date" valueDate="2026-09-22"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftspiritswend/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Vegan Food Festival Zagreb"/>
+            <column name="description"
+                    value="Festival veganske hrane u Zagrebu."/>
+            <column name="location" value="Ribnjak"/>
+            <column name="date" valueDate="2026-08-14"/>
+            <column name="image_url" value="https://picsum.photos/seed/veganfoodfestzg/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Beer Fair Zagreb"/>
+            <column name="description"
+                    value="Sajam craft piva u Zagrebu."/>
+            <column name="location" value="Jarun"/>
+            <column name="date" valueDate="2026-06-23"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftbeerfairzg/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Jazz Festival Summer Zagreb"/>
+            <column name="description"
+                    value="Ljetni jazz festival u Zagrebu."/>
+            <column name="location" value="Koncertna dvorana Vatroslav Lisinski"/>
+            <column name="date" valueDate="2026-10-04"/>
+            <column name="image_url" value="https://picsum.photos/seed/jazzfestsummerzg/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Food and Craft Beer Festival"/>
+            <column name="description"
+                    value="Festival hrane i craft piva."/>
+            <column name="location" value="Strossmayerov trg"/>
+            <column name="date" valueDate="2026-07-14"/>
+            <column name="image_url" value="https://picsum.photos/seed/foodcraftbeerfest/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Coffee Weekend"/>
+            <column name="description"
+                    value="Vikend craft kave."/>
+            <column name="location" value="Cijeli grad"/>
+            <column name="date" valueDate="2026-05-19"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftcoffeewend/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Artisan Cheese Festival Zagreb"/>
+            <column name="description"
+                    value="Festival artisan sireva u Zagrebu."/>
+            <column name="location" value="Krapina"/>
+            <column name="date" valueDate="2026-10-02"/>
+            <column name="image_url" value="https://picsum.photos/seed/artisancheesefestzg/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Honey Weekend"/>
+            <column name="description"
+                    value="Vikend craft meda."/>
+            <column name="location" value="Maksimir"/>
+            <column name="date" valueDate="2026-08-26"/>
+            <column name="image_url" value="https://picsum.photos/seed/crafthoneywend/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Street Art and Music Festival"/>
+            <column name="description"
+                    value="Festival ulične umjetnosti i glazbe."/>
+            <column name="location" value="Savica"/>
+            <column name="date" valueDate="2026-07-05"/>
+            <column name="image_url" value="https://picsum.photos/seed/streetartmusicfest/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Craft Whiskey Festival Zagreb"/>
+            <column name="description"
+                    value="Festival craft viskija u Zagrebu."/>
+            <column name="location" value="Kaptol"/>
+            <column name="date" valueDate="2026-11-03"/>
+            <column name="image_url" value="https://picsum.photos/seed/craftwhiskeyfestzg/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Wine Weekend Zagreb Summer"/>
+            <column name="description"
+                    value="Ljetni vikend vina u Zagrebu."/>
+            <column name="location" value="Trg bana Josipa Jelačića"/>
+            <column name="date" valueDate="2026-09-12"/>
+            <column name="image_url" value="https://picsum.photos/seed/winewendzgsummer/800/400"/>
+        </insert>
+        <insert tableName="festivals">
+            <column name="name" value="Food Festival Summer Zagreb"/>
+            <column name="description"
+                    value="Ljetni festival hrane u Zagrebu."/>
+            <column name="location" value="Tvornica kulture"/>
+            <column name="date" valueDate="2026-07-18"/>
+            <column name="image_url" value="https://picsum.photos/seed/foodfestsummerzg/800/400"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="09-seed-foods-and-drinks" author="zagreb-open-festivals">
+        <insert tableName="foods">
+            <column name="name" value="Burger"/>
+            <column name="price" valueNumeric="8.50"/>
+            <column name="festival_id" valueComputed="(SELECT id FROM festivals WHERE name = 'Beer Fest')"/>
+        </insert>
+        <insert tableName="foods">
+            <column name="name" value="Pizza"/>
+            <column name="price" valueNumeric="7.00"/>
+            <column name="festival_id" valueComputed="(SELECT id FROM festivals WHERE name = 'Beer Fest')"/>
+        </insert>
+        <insert tableName="foods">
+            <column name="name" value="Pomfrit"/>
+            <column name="price" valueNumeric="3.50"/>
+            <column name="festival_id" valueComputed="(SELECT id FROM festivals WHERE name = 'Beer Fest')"/>
+        </insert>
+
+        <insert tableName="drinks">
+            <column name="name" value="Pivo"/>
+            <column name="price" valueNumeric="4.00"/>
+            <column name="festival_id" valueComputed="(SELECT id FROM festivals WHERE name = 'Beer Fest')"/>
+        </insert>
+        <insert tableName="drinks">
+            <column name="name" value="Kokteli"/>
+            <column name="price" valueNumeric="6.50"/>
+            <column name="festival_id" valueComputed="(SELECT id FROM festivals WHERE name = 'Beer Fest')"/>
+        </insert>
+        <insert tableName="drinks">
+            <column name="name" value="Sokovi"/>
+            <column name="price" valueNumeric="2.50"/>
+            <column name="festival_id" valueComputed="(SELECT id FROM festivals WHERE name = 'Beer Fest')"/>
+        </insert>
+
+        <insert tableName="foods">
+            <column name="name" value="Ćevapi"/>
+            <column name="price" valueNumeric="9.00"/>
+            <column name="festival_id" valueComputed="(SELECT id FROM festivals WHERE name = 'Food Festival')"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

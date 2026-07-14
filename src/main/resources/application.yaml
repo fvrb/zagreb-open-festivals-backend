@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: zagreb-open-festivals-backend
+
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:zagreb_open_festivals}
+    username: ${DB_USERNAME:zof_user}
+    password: ${DB_PASSWORD:zof_password}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: false
+
+  liquibase:
+    change-log: classpath:db/changelog/changelog-master.xml
+
+server:
+  port: ${SERVER_PORT:8080}
+
+jwt:
+  secret: ${JWT_SECRET:zagreb-open-festivals-super-secret-key-change-me-in-production-1234567890}
+  expiration-ms: ${JWT_EXPIRATION_MS:60000}          # 1 minuta - namjerno kratko, da se refresh flow odmah vidi u praksi
+  refresh-expiration-ms: ${JWT_REFRESH_EXPIRATION_MS:604800000}  # 7 dana
+  refresh-cookie:
+    secure: ${JWT_REFRESH_COOKIE_SECURE:false}       # true na produkciji (HTTPS)
+
+logging:
+  level:
+    com.zagrebopenfestivals: DEBUG
+    org.hibernate.SQL: WARN
